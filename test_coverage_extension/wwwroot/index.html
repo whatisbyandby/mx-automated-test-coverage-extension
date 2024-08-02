@@ -1,0 +1,59 @@
+﻿<html lang="en">
+<head>
+    <title>To Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        @layer base {
+            body {
+                @apply m-6 ;
+            }
+
+            h1 {
+                @apply text-2xl mt-6 text-blue-600;
+            }
+
+            h2 {
+                @apply text-xl mt-6;
+            }
+
+            li {
+                @apply ml-2;
+            }
+
+
+            button {
+                @apply text-blue-600 italic;
+            }
+
+            .ga-marketplace-list {
+                background-color: lightgray;
+            }
+
+            #reloadMarketplaceModulesBtn {
+                margin: 10px 10px 10px 10px;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+
+    <h1>Test Coverage Report</h1>
+    <p>
+        <div id="test-suite-list">
+            <ul id="test-suite-items">
+                <li>MyFirstModule</li>
+            </ul>
+        </div>
+    </p>
+
+    <!-- showDevToolsBtn is for debuging the internal browsers of Mendix Studio Pro  -->
+    <!--<button id="showDevToolsBtn">Show Dev Tools</button>-->
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

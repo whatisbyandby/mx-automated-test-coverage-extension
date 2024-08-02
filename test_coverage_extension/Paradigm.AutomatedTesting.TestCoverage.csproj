@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TestProjectPath>$(MSBuildProjectDirectory)\..\ExtensionTestingApp\extensions\Paradigm</TestProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mendix.StudioPro.ExtensionsAPI" Version="10.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="wwwroot\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="wwwroot\main.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <BuildOutput Include="$(TargetDir)**\*"
+                   Exclude="$(TargetDir)wwwroot\**\*" />
+      <WwwRootFiles Include="$(TargetDir)wwwroot\**\*" />
+    </ItemGroup>
+
+    <!-- Copy all build output files except wwwroot files -->
+    <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(TestProjectPath)" SkipUnchangedFiles="false" />
+
+    <!-- Copy wwwroot files to the wwwroot directory in the destination folder -->
+    <Copy SourceFiles="@(WwwRootFiles)" DestinationFolder="$(TestProjectPath)\wwwroot" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>
